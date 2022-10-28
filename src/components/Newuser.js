@@ -1,5 +1,4 @@
 import React,{useState} from "react";
-import ReactDOM from "react-dom";
 
 
 
@@ -15,7 +14,7 @@ const SignUpForm=()=> {
             const response=await fetch(
                 "https://strangers-things.herokuapp.com/api/2209-ftb-mt-web-ft/SignUp",
 
-    {   
+                {   
                 method:"post",
                 headers:{
                     "Content-Type":"application/json"
@@ -27,19 +26,20 @@ const SignUpForm=()=> {
                         password:password
                     }
                 })
-            }
-        }
-    }
+                 })
+        
+
 
     const data= await response.json();
 
 
 
     localStorage.setItem("token",data.data.token);
-} catch { (error){
 
-}
-}
+    } catch (error){console.error(error)}
+    }
+
+    
  function updateUsername(event){
     setUsername(event.target.value)
 
@@ -64,5 +64,7 @@ const SignUpForm=()=> {
             <button type="Enter"> Register For New Account</button>
         </form>
     </div>
- )
- ReactDOM.render(<SignUpForm/>,document.getElementById("app"));
+    )}
+
+    export default Newuser;
+    

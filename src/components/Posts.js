@@ -1,16 +1,17 @@
-import React from "react";
-import "react-router-dom";
+import React, {useState,useEffect} from "react";
+import {useOutletContext} from "react-router-dom";
 
 const Posts=() =>{
-    const outletContext= useOutletContext();
 
+    const outletContext= useOutletContext();
+    const [posts,setPosts]=outletContext
     return(
         <div>
             <p> All Posts available here </p>
             {
-                outletContext[0].map((Posts,idx)=> {
+                posts.map((post,idx)=> {
                     return <div key={idx}>
-                    <p> Post: {posts}</p>
+                    <p> post: {post._id}</p>
                     </div>
                 })
             }
@@ -18,11 +19,4 @@ const Posts=() =>{
     )
 } 
 
-fetch("https://strangers-things.herokuapp.com/api/2209-ftb-mt-web-ft/Posts")
-.then(response=> response.json())
-.then(result=>{
-    console.log(result);
-
-})
-.catch(console.error);
 export default Posts;

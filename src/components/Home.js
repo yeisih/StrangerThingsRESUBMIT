@@ -1,45 +1,22 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Navbar from "./Navbar";
-
-import "react-dom";
-import { response } from "express";
+import { Outlet } from "react-router-dom";
 
 const Home=() => {
-    const [Posts,setPosts]=useState([""])
+    const [Posts,setPosts]=useState([])
 
 useEffect(()=>{
     async function fetchstrangerThingsData(){
 
         try{
-            const response=await fetch ("https://strangers-things.herokuapp.com/api/2209-ftb-mt-web-ft/Posts",{
-                method:"Post",
-                headers:{
-                    "content-type":"application/json"
-                }, 
-                body:JSON.stringify({"dsknlsan"),
-                user:{
-                    username:"",
-                    password:"",
-                }
-                    .then(response=> response.json())
-                    .then(result => {
-                        console.log(result);
-                    }
+            const response=await fetch ("https://strangers-things.herokuapp.com/api/2209-ftb-mt-web-ft/posts")
+        const data= await response.json()
+        console.log(data)
+        setPosts(data.data.posts)
+        
 
-
-                
-                });
-
-
-
-            const strangerThingsData= await response.json();
-
-
-            setPosts(strangerThingsData.data.Posts)
-        } catch(error) {
-            console.log(error);
-        }
-        }
+        } catch(error){console.error(error)}
+    }
         fetchstrangerThingsData()
     },[])
 
@@ -48,9 +25,7 @@ useEffect(()=>{
 
 return (
     <div>
-        <h1> Welcome to Home!</h1>
         <Navbar/>
-        <p> HOME </p>
         <Outlet context={[Posts,setPosts]}/>
 
     </div>
